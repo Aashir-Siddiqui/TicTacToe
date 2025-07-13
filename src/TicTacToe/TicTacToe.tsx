@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import circle from '../assets/circle.png';
 import cross from '../assets/cross.png';
 
@@ -8,7 +8,7 @@ export default function TicTacToe() {
   const [lock, setLock] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("Tic Tac Toe");
 
-  const toggle = (e: React.MouseEvent<HTMLDivElement>, num: number) => {
+  const toggle = (num: number) => {
     if (lock || data[num]) return;
 
     const newData = [...data];
@@ -63,23 +63,23 @@ export default function TicTacToe() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900">
       <h1
-        className="text-4xl font-bold text-white mb-8"
+        className="text-2xl sm:text-4xl font-bold text-white mb-8"
         dangerouslySetInnerHTML={{ __html: message }}
       />
-      <div className={`grid grid-cols-3 gap-2 w-96 h-96 bg-gray-800 p-4 rounded-lg shadow-xl ${lock ? 'opacity-50' : ''}`}>
+      <div className={`grid grid-cols-3 gap-2 w-80 sm:w-96 h-80 sm:h-96 place-items-center bg-gray-800 p-4 rounded-lg shadow-xl ${lock ? 'opacity-50' : ''}`}>
         {data.map((cell, index) => (
           <div
             key={index}
-            className="bg-gray-700 rounded-md flex items-center justify-center cursor-pointer hover:bg-gray-600 transition-colors duration-200 w-28 h-28"
-            onClick={(e) => toggle(e, index)}
+            className="bg-gray-700 rounded-md flex items-center justify-center cursor-pointer hover:bg-gray-600 transition-colors duration-200 w-20 sm:w-28 h-20 sm:h-28"
+            onClick={() => toggle(index)}
           >
-            {cell === 'x' && <img src={cross} alt="cross" className="w-20 h-20" />}
+            {cell === 'x' && <img src={cross} alt="cross" className="w-14 sm:w-20 h-14 sm:h-20" />}
             {cell === 'o' && <img src={circle} alt="circle" className="w-20 h-20" />}
           </div>
         ))}
       </div>
       <button
-        className="mt-8 px-8 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-200 font-semibold"
+        className="mt-8 px-8 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-200 font-semibold cursor-pointer"
         onClick={resetGame}
       >
         Reset
